@@ -3,11 +3,11 @@ spring:
     import: optional:classpath:application-secrets.yaml
 
   application:
-    name: backend
+    name: demo
 
-  # ── MySQL Database (Aiven; falls back to local XAMPP if no secrets file) ──
+  # ── MySQL Database (falls back to local MySQL if no secrets file) ──
   datasource:
-    url: ${db.url:jdbc:mysql://localhost:3306/duyanan_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Manila}
+    url: ${db.url:jdbc:mysql://localhost:3306/demo?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Manila}
     driverClassName: com.mysql.cj.jdbc.Driver
     username: ${db.username:root}
     password: ${db.password:}
@@ -19,33 +19,8 @@ spring:
       ddl-auto: update
     show-sql: true
 
-  # ── CORS (allow frontend to call the backend) ─────────────────
-  web:
-    cors:
-      allowed-origins: "*"
-
-  # ── Mail / SMTP (Gmail) ───────────────────────────────────────
-  # Replace with your Gmail address and App Password
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: YOUR_GMAIL@gmail.com
-    password: YOUR_APP_PASSWORD
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
-
   # ── Multipart File Upload Limits ──────────────────────────────
   servlet:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
-
-# ── JWT Configuration ─────────────────────────────────────────
-jwt:
-  secret: DuyananRestaurantSuperSecretKeyForJWT2026!MustBe32+Chars
-  expiration: 86400000
