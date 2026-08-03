@@ -35,6 +35,10 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    public void deleteAllBooks() {
+        bookRepository.deleteAll();
+    }
+
     public boolean updateBook(long id, BookDto bookDto) {
         Optional<Books> existingBook = bookRepository.findById(id);
         if(existingBook.isPresent()){

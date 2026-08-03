@@ -39,6 +39,12 @@ public class BookController {
         List books = bookService.getAllBooks();
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<String> deleteAllBooks(){
+        bookService.deleteAllBooks();
+        return new ResponseEntity<>("All books deleted", HttpStatus.OK);
+    }
     @PatchMapping("/{id}")
     public ResponseEntity<String> updateBook(@PathVariable long id, @RequestBody BookDto bookDto){
         boolean isUpdated = bookService.updateBook(id, bookDto);
